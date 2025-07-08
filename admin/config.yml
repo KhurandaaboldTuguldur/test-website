@@ -1,16 +1,25 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: main # Таны репозиторийн үндсэн салбар (main эсвэл master)
 
+# When testing locally using the netlify-cms-proxy-server
 local_backend: true
-media_folder: 'static/images/uploads'
-public_folder: '/images/uploads'
+
+# Media files will be stored in the repo under this directory
+media_folder: "static/images/uploads"
+
+# The public url to media files
+public_folder: "/images/uploads"
 
 collections:
-  - name: 'posts'
-    label: 'Posts'
-    folder: 'content/posts'
-    create: true
-    fields:
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: "blog" # Used in routes, e.g., /admin/collections/blog
+    label: "Blog" # Used in the UI
+    folder: "content/blog" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template
+    fields: # The fields for each document
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
