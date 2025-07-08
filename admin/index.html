@@ -10,38 +10,33 @@
     
     <!-- Netlify CMS Scripts -->
     <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
-    <script src="https://unpkg.com/netlify-cms-app@^2.15.0/dist/netlify-cms-app.js"></script>
-    
-    <!-- Type Module -->
-    <script type="module">
-      import NetlifyCmsApp from 'https://unpkg.com/netlify-cms-app@^2.15.0/dist/esm/index.js';
-      
-      NetlifyCmsApp.init({
-        config: {
-          backend: {
-            name: 'git-gateway',
-            branch: 'main'
-          },
-          media_folder: 'images/uploads',
-          public_folder: '/images/uploads',
-          collections: [
-            {
-              name: 'posts',
-              label: 'Posts', 
-              folder: '_posts',
-              create: true,
-              fields: [
-                { label: 'Title', name: 'title', widget: 'string' },
-                { label: 'Body', name: 'body', widget: 'markdown' }
-              ]
-            }
-          ]
-        }
-      });
-    </script>
   </head>
   <body>
     <!-- CMS Container -->
     <div id="netlify-cms-app"></div>
+
+    <script type="module">
+      // Direct initialization without import
+      window.CMS.init({
+        backend: {
+          name: 'git-gateway',
+          branch: 'main'
+        },
+        media_folder: 'images/uploads',
+        public_folder: '/images/uploads',
+        collections: [
+          {
+            name: 'posts',
+            label: 'Posts',
+            folder: '_posts',
+            create: true,
+            fields: [
+              { label: 'Title', name: 'title', widget: 'string' },
+              { label: 'Body', name: 'body', widget: 'markdown' }
+            ]
+          }
+        ]
+      });
+    </script>
   </body>
 </html>
