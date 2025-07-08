@@ -1,42 +1,56 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netlify CMS Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Netlify Identity -->
+    <!-- Netlify Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     
-    <!-- Netlify CMS Scripts -->
+    <!-- Netlify CMS Script -->
     <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
-  </head>
-  <body>
-    <!-- CMS Container -->
-    <div id="netlify-cms-app"></div>
+</head>
+<body>
+    <script>
+        // Direct CMS initialization
+        if (window.CMS) {
+            window.CMS.init({
+                backend: {
+                    name: 'git-gateway',
+                    branch: 'main'
+                },
+                local_backend: true,
+                media_folder: 'static/images/uploads',
+                public_folder: '/images/uploads',
+                collections: [
+                    {
+                        name: 'posts',
+                        label: 'Posts',
+                        folder: 'content/posts',
+                        create: true,
+                        fields: [
+                            { label: 'Title', name: 'title', widget: 'string' },
+                            { label: 'Body', name: 'body', widget: 'markdown' }
+                        ]
+                    }
+                ]
+            });
+        } else {
+            console.error('Netlify CMS not loaded correctly');
+        }
 
-    <script type="module">
-      // Direct initialization without import
-      window.CMS.init({
-        backend: {
-          name: 'git-gateway',
-          branch: 'main'
-        },
-        media_folder: 'images/uploads',
-        public_folder: '/images/uploads',
-        collections: [
-          {
-            name: 'posts',
-            label: 'Posts',
-            folder: '_posts',
-            create: true,
-            fields: [
-              { label: 'Title', name: 'title', widget: 'string' },
-              { label: 'Body', name: 'body', widget: 'markdown' }
-            ]
-          }
-        ]
-      });
+        // Netlify Identity handling
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.netlifyIdentity) {
+                window.netlifyIdentity.on('login', (user) => {
+                    window.netlifyIdentity.close();
+                });
+                window.netlifyIdentity.on('logout', () => {
+                    // Handle logout
+                });
+            }
+        });
     </script>
-  </body>
+</body>
 </html>
