@@ -2,11 +2,29 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Content Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netlify CMS Admin</title>
+    
+    <!-- Netlify Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
+    <!-- Netlify CMS script -->
     <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
   </head>
   <body>
-    <!-- Netlify CMS script tags -->
+    <!-- CMS будет загружаться сюда -->
+    <script>
+      // Netlify Identity авторизацийн эвент листенер
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on('login', (user) => {
+            window.netlifyIdentity.close();
+          });
+          window.netlifyIdentity.on('logout', () => {
+            // Logout үед хийх үйлдэл
+          });
+        }
+      });
+    </script>
   </body>
 </html>
