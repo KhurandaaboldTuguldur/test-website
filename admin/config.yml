@@ -6,15 +6,10 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "news"
-    label: "Мэдээнүүд"
-    folder: "news"
+  - name: "posts"
+    label: "Posts"
+    folder: "_posts"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Гарчиг", name: "title", widget: "string", required: true }
-      - { label: "Огноо", name: "date", widget: "datetime", required: true }
-      - { label: "Хураангуй", name: "summary", widget: "text", required: false }
-      - { label: "Зураг", name: "image", widget: "image", required: false }
-      - { label: "Агуулга", name: "body", widget: "markdown", required: true }
-      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}
