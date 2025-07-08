@@ -5,23 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netlify CMS Admin</title>
     
-    <!-- Netlify Identity Widget -->
+    <!-- Netlify Identity -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     
-    <!-- Netlify CMS script -->
+    <!-- Netlify CMS Scripts -->
     <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
     <script src="https://unpkg.com/netlify-cms-app@^2.15.0/dist/netlify-cms-app.js"></script>
-  </head>
-  <body>
-    <!-- CMS загрузка элемент -->
-    <div id="netlify-cms-app"></div>
-
-    <script>
-      // CMS initialization 
-      import CMS from 'netlify-cms-app'
-      import './config.yml'
-
-      CMS.init({
+    
+    <!-- Type Module -->
+    <script type="module">
+      import NetlifyCmsApp from 'https://unpkg.com/netlify-cms-app@^2.15.0/dist/esm/index.js';
+      
+      NetlifyCmsApp.init({
         config: {
           backend: {
             name: 'git-gateway',
@@ -32,7 +27,7 @@
           collections: [
             {
               name: 'posts',
-              label: 'Posts',
+              label: 'Posts', 
               folder: '_posts',
               create: true,
               fields: [
@@ -44,5 +39,9 @@
         }
       });
     </script>
+  </head>
+  <body>
+    <!-- CMS Container -->
+    <div id="netlify-cms-app"></div>
   </body>
 </html>
