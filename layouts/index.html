@@ -1,21 +1,17 @@
 {{ define "main" }}
-  <div class="container">
+<div class="container">
     <h1>{{ .Title }}</h1>
-    <div class="content">
-      {{ .Content }}
-    </div>
+    {{ .Content }}
     
-    {{ if eq .Section "blog" }}
-      <div class="recent-posts">
+    <div class="recent-posts">
         <h2>Recent Posts</h2>
-        {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
-          <div class="post">
+        {{ range first 5 (where .Site.RegularPages "Section" "in" (slice "blog" "news")) }}
+        <div class="post">
             <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-            <p>{{ .Date.Format "2006-01-02" }}</p>
+            <time>{{ .Date.Format "2006-01-02" }}</time>
             <p>{{ .Summary }}</p>
-          </div>
+        </div>
         {{ end }}
-      </div>
-    {{ end }}
-  </div>
+    </div>
+</div>
 {{ end }}
