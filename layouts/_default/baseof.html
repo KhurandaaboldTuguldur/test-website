@@ -1,53 +1,21 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode | default "en" }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    
-    <!-- Netlify Identity -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
-    <header>
-        {{ partial "header.html" . }}
-    </header>
-    
-    <main>
-        {{ block "main" . }}{{ end }}
-    </main>
-    
-    <footer>
-        {{ partial "footer.html" . }}
-    </footer>
-    
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/easing.min.js"></script>
-    <script src="/js/waypoints.min.js"></script>
-    <script src="/js/owl.carousel.min.js"></script>
-    
-    <!-- Netlify CMS 관련 스크립트 -->
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-      
-    
-    </script>
+{{ if eq .Site.Params.darkmode "dark" }}
+<html lang="{{ .Site.LanguageCode | default .Site.Language.Lang }}" class="dark">
+{{ else }}
+<html lang="{{ .Site.LanguageCode | default .Site.Language.Lang }}">
+{{ end }}
+{{- partial "head.html" . -}}
+
+<body class="font-sans">
+    <div class="min-h-screen flex flex-col bg-gray-100 dark:bg-warmgray-800">
+        {{- partial "header.html" . -}}
+        <div class="container max-w-screen-xl mx-auto mt-4 flex-grow px-5 lg:px-0" id="content">
+            <div class="lg:mx-5">
+            {{- block "main" . }}{{- end }}
+            </div>
+        </div>
+        {{- partial "footer.html" . -}}
+    </div>
 </body>
+
 </html>

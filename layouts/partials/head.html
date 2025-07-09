@@ -1,23 +1,30 @@
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
-    
-    <!-- SEO 메타태그 -->
-    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
-    <link rel="canonical" href="{{ .Permalink }}">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
-    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
-    <meta property="og:url" content="{{ .Permalink }}">
-    <meta property="og:site_name" content="{{ .Site.Title }}">
-
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://identity.netlify.com https://unpkg.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'  https:; connect-src 'self' https://api.netlify.com;">
-    
-    <!-- CSS -->
-    <!-- 문제가 되는 부분을 수정 -->
-    <!-- 간단한 CSS 링크로 대체 -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    {{- partial "analytics" . -}}
+    {{- if .Site.Params.Analytics.Yandexmetrica.Enabled -}}
+    {{ partial "metrica.html" . }}
+    {{- end -}}
+    <title>{{site.Title}}{{if not .IsHome}} | {{.Title}}{{end}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <link rel="apple-touch-icon" sizes="180x180" href='{{ "favicon/apple-touch-icon.png" | relURL }}'>
+    <link rel="icon" type="image/png" sizes="32x32" href='{{ "favicon/favicon-32x32.png" | relURL }}'>
+    <link rel="icon" type="image/png" sizes="16x16" href='{{ "favicon/favicon-16x16.png" | relURL }}'>
+    <link rel="manifest" href='{{ "favicon/site.webmanifest" | relURL }}' />
+    <link rel="mask-icon" href=' {{ "favicon/safari-pinned-tab.svg" | relURL }}' color="#5bbad5" />
+    <link rel="shortcut icon" href='{{ "favicon/favicon.ico" | relURL }}' />
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="{{site.Title}}{{if not .IsHome}} | {{.Title}}{{end}}" />
+    {{ $styles := resources.Get "css/style.css" | postCSS }}
+    {{ if hugo.IsServer }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
+    {{ else }}
+    {{ $styles := $styles | minify | fingerprint | resources.PostProcess }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
+    {{ end }}
+    <link href=' {{ "css/blonde.min.css" | relURL }}' rel="stylesheet" type="text/css" media="print"
+        onload="this.media=' all'">
+    {{ partial "seo/print.html" . }}
+    {{ block "header_css" . }}{{ end }}
+    <link rel="stylesheet" href='{{ "css/custom.css" | relURL }}'>
+    <i class="dark hidden"></i>
 </head>
