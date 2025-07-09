@@ -1,0 +1,63 @@
+baseURL = "https://test-website123323.netlify.app/"
+languageCode = "en-us"
+title = "Test site"
+theme = ""                           # Хэрэв темплейт ашиглаж байгаа бол тохируулах
+
+enableRobotsTXT = true               # robots.txt файл үүсгэх
+disableKinds = ["taxonomy", "term"]  # Хэрэв taxonomy ашиглахгүй бол хаах
+
+# Build тохиргоо
+[build]
+  writeStats = true
+
+# Хялбар параметрүүд
+[params]
+  description = "Your site description"
+  mainSections = ["blog", "news"]    # Үндсэн контент хэсгүүд
+  images = ["img/og-image.jpg"]      # OpenGraph default зураг
+  dateFormat = "2006-01-02"          # Огноо формат
+  
+  # Нийгмийн сүлжээ линкүүд
+  [params.social]
+    twitter = "username"
+    facebook = "username"
+    instagram = "username"
+
+# Цэс тохиргоо
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 2
+  [[menu.main]]
+    name = "News"
+    url = "/news/"
+    weight = 3
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 4
+
+# Нэмэлт формат
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true                  # HTML код markdown дотор зөвшөөрөх
+  [markup.highlight]
+    style = "monokai"                # Код хайлайтерийн стайл
+
+# Олон хэл (хэрэв шаардлагатай бол)
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+  [languages.ko]
+    languageName = "한국어"
+    weight = 2
+    title = "테스트 사이트"
+    [languages.ko.params]
+      description = "사이트 설명"
