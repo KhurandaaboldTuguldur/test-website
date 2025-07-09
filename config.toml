@@ -1,17 +1,8 @@
 baseURL = "https://test-website123323.netlify.app/"
 languageCode = "en-us"
-title = "Test site"
+title = "Test Website"
 
-# 기본 빌드 설정
-publishDir = "public"
-disableKinds = []  # 필요하지 않은 페이지 유형 비활성화
-
-[build]
-  writeStats = true
-
-[params]
-  description = "Your site description"
-  
+# 메뉴 설정
 [menu]
   [[menu.main]]
     name = "Home"
@@ -21,3 +12,6 @@ disableKinds = []  # 필요하지 않은 페이지 유형 비활성화
     name = "Blog"
     url = "/blog/"
     weight = 2
+
+[params]
+  description = "A test website built with Hugo"

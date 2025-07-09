@@ -1,25 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode | default "en" }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+{{ partial "head.html" . }}
 <body>
     <header>
-        <!-- 간단한 네비게이션 -->
-        <nav>
-            <div class="container">
-                <a href="/">{{ .Site.Title }}</a>
-                <ul>
-                    {{ range .Site.Menus.main }}
-                    <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-                    {{ end }}
-                </ul>
-            </div>
-        </nav>
+        {{ partial "header.html" . }}
     </header>
     
     <main>
@@ -27,9 +11,7 @@
     </main>
     
     <footer>
-        <div class="container">
-            <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}</p>
-        </div>
+        {{ partial "footer.html" . }}
     </footer>
     
     <script src="/js/main.js"></script>
