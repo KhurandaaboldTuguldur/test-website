@@ -7,10 +7,7 @@
   "author": "wamo <ainznino@pm.me>",
   "license": "MIT",
   "scripts": {
-    "start": "concurrently npm:watch:*",
-    "watch:tw": "tailwindcss -i ./themes/Blonde/assets/css/main.css -o ./themes/Blonde/assets/css/style.css --watch",
-    "watch:hugo": "hugo server",
-    "build": "tailwindcss -i ./themes/Blonde/assets/css/main.css -o ./themes/Blonde/assets/css/style.css && hugo --minify"
+    "build": "hugo --theme=dimension --buildDrafts --gc --minify"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11",
