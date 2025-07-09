@@ -1,8 +1,14 @@
 [build]
-  command = "echo 'No build steps'"
-  publish = "."
+  publish = "public"
+  command = "hugo"
+
+[build.environment]
+  HUGO_VERSION = "0.101.0"  # Энд таны ашиглаж буй Hugo хувилбарыг бичнэ
+
+[context.production.environment]
+  HUGO_ENV = "production"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/admin/*"
+  to = "/admin/index.html"
   status = 200
