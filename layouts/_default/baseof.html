@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode | default "en" }}">
-{{ partial "head.html" . }}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://identity.netlify.com https://unpkg.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'  https:; connect-src 'self' https://api.netlify.com;">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Netlify CMS 관련 스크립트 -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
 <body>
     <header>
-        {{ partial "header.html" . }}
+        <!-- Header content -->
     </header>
     
     <main>
@@ -11,7 +20,7 @@
     </main>
     
     <footer>
-        {{ partial "footer.html" . }}
+        <!-- Footer content -->
     </footer>
     
     <script src="/js/main.js"></script>
