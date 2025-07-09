@@ -156,21 +156,29 @@
   <div class="container py-5">
     <div class="row g-4">
       <div class="col-lg-8">
-        {{ range .Site.RegularPages }}
+        <!-- Мэдээний жагсаалт -->
+        {{ $blogPages := where .Site.Pages "Section" "blog" }}
+        {{ range $blogPages }}
         <div class="border-bottom pb-4 mb-4">
           <div class="position-relative overflow-hidden rounded mb-3">
             {{ with .Params.featured_image }}
               <img src="{{ . }}" class="img-fluid rounded img-zoomin w-100" alt="">
+            {{ else }}
+              <img src="/images/default-post.jpg" class="img-fluid rounded img-zoomin w-100" alt="">
             {{ end }}
             <div class="d-flex justify-content-center px-4 position-absolute flex-wrap" style="bottom: 10px; left: 0;">
-              <a href="#" class="text-white me-3 link-hover"><i class="fa fa-clock"></i> {{ .ReadingTime }} min read</a>
+              <a href="#" class="text-white me-3 link-hover"><i class="fa fa-clock"></i> {{ .ReadingTime | default 1 }} min read</a>
               <a href="#" class="text-white me-3 link-hover"><i class="fa fa-eye"></i> {{ .Params.views | default "0" }} views</a>
               <a href="#" class="text-white me-3 link-hover"><i class="fa fa-comment-dots"></i> Comments</a>
-              <a href="{{ .Permalink }}" class="text-white link-hover"><i class="fa fa-arrow-up"></i> Read More</a>
+              <a href="{{ .RelPermalink }}" class="text-white link-hover"><i class="fa fa-arrow-up"></i> Read More</a>
             </div>
           </div>
-          <a href="{{ .Permalink }}" class="display-6 text-dark mb-2 d-block link-hover">{{ .Title }}</a>
-          <p class="mb-0">{{ .Summary }}</p>
+          <a href="{{ .RelPermalink }}" class="display-6 text-dark mb-2 d-block link-hover">{{ .Title }}</a>
+          <p class="mb-0">{{ .Summary | truncate 150 }}</p>
+        </div>
+        {{ else }}
+        <div class="alert alert-info">
+          Одоогоор мэдээ байхгүй байна.
         </div>
         {{ end }}
       </div>
@@ -179,15 +187,22 @@
       <div class="col-lg-4">
         <div class="bg-light rounded p-4">
           <h4 class="mb-4">Шинэ мэдээнүүд</h4>
-          {{ range first 5 .Site.RegularPages }}
+          {{ $recentPages := first 5 (where .Site.Pages "Section" "blog") }}
+          {{ range $recentPages }}
           <div class="d-flex mb-3">
             {{ with .Params.featured_image }}
               <img src="{{ . }}" class="img-fluid rounded me-3" style="width: 80px; height: 60px; object-fit: cover;" alt="">
+            {{ else }}
+              <img src="/images/default-post-small.jpg" class="img-fluid rounded me-3" style="width: 80px; height: 60px; object-fit: cover;" alt="">
             {{ end }}
             <div>
-              <a href="{{ .Permalink }}" class="h6 d-block mb-1">{{ .Title }}</a>
-              <small><i class="fa fa-clock me-1"></i> {{ .ReadingTime }} min</small>
+              <a href="{{ .RelPermalink }}" class="h6 d-block mb-1">{{ .Title }}</a>
+              <small><i class="fa fa-clock me-1"></i> {{ .ReadingTime | default 1 }} min</small>
             </div>
+          </div>
+          {{ else }}
+          <div class="text-center">
+            <p>Шинэ мэдээ байхгүй байна.</p>
           </div>
           {{ end }}
         </div>
@@ -196,7 +211,6 @@
   </div>
 </div>
 <!-- Main Post Section End -->
-
 
 
 
