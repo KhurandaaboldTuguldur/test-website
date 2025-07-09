@@ -151,92 +151,52 @@
         <!-- Features Images Only End -->
 
         
-<!-- Main Post Section Start (Cleaned Template) -->
+<!-- Main Post Section Start -->
 <div class="container-fluid py-5">
   <div class="container py-5">
     <div class="row g-4">
-      <div class="col-lg-7 col-xl-8 mt-0">
-        <div class="position-relative overflow-hidden rounded">
-          <img src="img/news-1.jpg" class="img-fluid rounded img-zoomin w-100" alt="">
-          <div class="d-flex justify-content-center px-4 position-absolute flex-wrap" style="bottom: 10px; left: 0;">
-            <!-- Placeholder metadata -->
-            <a href="#" class="text-white me-3 link-hover"><i class="fa fa-clock"></i> • minute read</a>
-            <a href="#" class="text-white me-3 link-hover"><i class="fa fa-eye"></i> • Views</a>
-            <a href="#" class="text-white me-3 link-hover"><i class="fa fa-comment-dots"></i> • Comment</a>
-            <a href="#" class="text-white link-hover"><i class="fa fa-arrow-up"></i> • Share</a>
-          </div>
-        </div>
-        <div class="border-bottom py-3">
-          <a href="#" class="display-4 text-dark mb-0 link-hover">[Гарчиг]</a>
-        </div>
-        <p class="mt-3 mb-4">[Энд мэдээний товч текст орно]</p>
-
-        <div class="bg-light p-4 rounded">
-          <div class="news-2">
-            <h3 class="mb-4">[Top Story]</h3>
-          </div>
-          <div class="row g-4 align-items-center">
-            <div class="col-md-6">
-              <div class="rounded overflow-hidden">
-                <img src="img/news-2.jpg" class="img-fluid rounded img-zoomin w-100" alt="">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="d-flex flex-column">
-                <a href="#" class="h3">[Top мэдээний гарчиг]</a>
-                <p class="mb-0 fs-5"><i class="fa fa-clock"> • minute read</i></p>
-                <p class="mb-0 fs-5"><i class="fa fa-eye"> • Views</i></p>
-              </div>
+      <div class="col-lg-8">
+        {{ range .Site.RegularPages }}
+        <div class="border-bottom pb-4 mb-4">
+          <div class="position-relative overflow-hidden rounded mb-3">
+            {{ with .Params.featured_image }}
+              <img src="{{ . }}" class="img-fluid rounded img-zoomin w-100" alt="">
+            {{ end }}
+            <div class="d-flex justify-content-center px-4 position-absolute flex-wrap" style="bottom: 10px; left: 0;">
+              <a href="#" class="text-white me-3 link-hover"><i class="fa fa-clock"></i> {{ .ReadingTime }} min read</a>
+              <a href="#" class="text-white me-3 link-hover"><i class="fa fa-eye"></i> {{ .Params.views | default "0" }} views</a>
+              <a href="#" class="text-white me-3 link-hover"><i class="fa fa-comment-dots"></i> Comments</a>
+              <a href="{{ .Permalink }}" class="text-white link-hover"><i class="fa fa-arrow-up"></i> Read More</a>
             </div>
           </div>
+          <a href="{{ .Permalink }}" class="display-6 text-dark mb-2 d-block link-hover">{{ .Title }}</a>
+          <p class="mb-0">{{ .Summary }}</p>
         </div>
+        {{ end }}
       </div>
 
-      <!-- Sidebar мэдээ placeholder -->
-      <div class="col-lg-5 col-xl-4">
-        <div class="bg-light rounded p-4 pt-0">
-          <div class="row g-4">
-            <!-- Нэг мэдээний блок -->
-            <div class="col-12">
-              <div class="rounded overflow-hidden">
-                <img src="img/news-3.jpg" class="img-fluid rounded img-zoomin w-100" alt="">
-              </div>
+      <!-- Sidebar мэдээ -->
+      <div class="col-lg-4">
+        <div class="bg-light rounded p-4">
+          <h4 class="mb-4">Шинэ мэдээнүүд</h4>
+          {{ range first 5 .Site.RegularPages }}
+          <div class="d-flex mb-3">
+            {{ with .Params.featured_image }}
+              <img src="{{ . }}" class="img-fluid rounded me-3" style="width: 80px; height: 60px; object-fit: cover;" alt="">
+            {{ end }}
+            <div>
+              <a href="{{ .Permalink }}" class="h6 d-block mb-1">{{ .Title }}</a>
+              <small><i class="fa fa-clock me-1"></i> {{ .ReadingTime }} min</small>
             </div>
-            <div class="col-12">
-              <div class="d-flex flex-column">
-                <a href="#" class="h4 mb-2">[Мэдээний гарчиг]</a>
-                <p class="fs-5 mb-0"><i class="fa fa-clock"> • minute read</i></p>
-                <p class="fs-5 mb-0"><i class="fa fa-eye"> • Views</i></p>
-              </div>
-            </div>
-
-            <!-- Давтагдах блокууд (нэмэлт мэдээнүүд) -->
-            <!-- Та эдгээрийг давтаж хэрэглэж болно -->
-            <div class="col-12">
-              <div class="row g-4 align-items-center">
-                <div class="col-5">
-                  <div class="overflow-hidden rounded">
-                    <img src="img/news-X.jpg" class="img-zoomin img-fluid rounded w-100" alt="">
-                  </div>
-                </div>
-                <div class="col-7">
-                  <div class="features-content d-flex flex-column">
-                    <a href="#" class="h6">[Мэдээний гарчиг]</a>
-                    <small><i class="fa fa-clock"> • minute read</i></small>
-                    <small><i class="fa fa-eye"> • Views</i></small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- ↑ Үүнийг өөр мэдээний зураг, текстээр солиход л болно -->
           </div>
+          {{ end }}
         </div>
       </div>
     </div>
   </div>
 </div>
 <!-- Main Post Section End -->
+
 
 
 
