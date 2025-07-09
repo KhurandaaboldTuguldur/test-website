@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode | default "en" }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+{{ partial "head.html" . }}
 <body>
     <header>
-        <!-- Header content -->
+        {{ partial "header.html" . }}
     </header>
     
     <main>
@@ -17,9 +11,9 @@
     </main>
     
     <footer>
-        <!-- Footer content -->
+        {{ partial "footer.html" . }}
     </footer>
     
-    <script src="/js/main.js"></script>
+    {{ partial "scripts.html" . }}
 </body>
 </html>
