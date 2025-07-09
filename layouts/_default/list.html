@@ -3,11 +3,10 @@
     <h1>{{ .Title }}</h1>
     {{ .Content }}
     
-    <div class="recent-posts">
-        <h2>Recent Posts</h2>
-        {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
-        <div class="post">
-            <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    <div class="post-list">
+        {{ range .Pages }}
+        <div class="post-item">
+            <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
             <time>{{ .Date.Format "2006-01-02" }}</time>
             <p>{{ .Summary }}</p>
         </div>
