@@ -3,11 +3,12 @@ base = "mysite"
 publish = "public"
 command = "npm install && git submodule update --remote --merge && npm run build"
 
-
 [build.environment]
+NODE_ENV = "development"
+
+[context.production.environment]
 HUGO_VERSION = "0.147.8"
-HUGO_ENABLEGITINFO = "true"
-NODE_VERSION = "18"
+
 
 [context.production.environment]
 HUGO_ENV = "production"
