@@ -13,6 +13,6 @@
     "build": "tailwindcss -i ./themes/Blonde/assets/css/main.css -o ./themes/Blonde/assets/css/style.css && hugo --minify"
   },
 "devDependencies": {
-  "tailwindcss": "^버전"
+  "tailwindcss": "^3.4.3"
 }
 }
